@@ -1,29 +1,33 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png" />
-    <HelloWorld msg="Welcome to Your Vue.js + TypeScript App" />
+    <h3>My Awesome Emoji Picker</h3>
+
+    <emojify-picker
+      :sheet="sheet"
+      :emoji-size="22"
+      style="width: 525px;height: 500px;"
+    />
   </div>
 </template>
 
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator";
-import HelloWorld from "./components/HelloWorld.vue";
+import EmojifyPicker from "./EmojifyPicker";
+import emojis from "./emojis.json";
 
 @Component({
   components: {
-    HelloWorld
+    EmojifyPicker
   }
 })
-export default class App extends Vue {}
+export default class App extends Vue {
+  sheet = emojis;
+}
 </script>
 
 <style lang="scss">
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+html,
+body {
+  font-family: "Arial", sans-serif;
 }
 </style>

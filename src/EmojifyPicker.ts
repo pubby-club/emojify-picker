@@ -61,6 +61,8 @@ export default class EmojifyPicker extends Vue {
   $refs!: {
     scroll: HTMLDivElement;
   };
+  
+  $t!: (text: string) => string
 
   // Current opened group index
   currentGroupIndex = 0;
@@ -147,8 +149,10 @@ export default class EmojifyPicker extends Vue {
     this.viewWidth = this.$refs.scroll.clientWidth - this.listPadding * 2;
   }
 
-  $t(text: string) {
-    return defaultTranslator(text);
+  created() {
+    if (!this.$t) {
+      this.$t = defaultTranslator
+    }
   }
 
   genEmojiGroups() {

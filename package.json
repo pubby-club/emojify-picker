@@ -1,11 +1,12 @@
 {
-  "name": "emojify-picker",
-  "version": "0.1.0",
-  "private": true,
+  "name": "@pubby-club/emojify-picker",
+  "version": "0.1.1",
+  "private": false,
+  "main": "dist/emojify-picker.umd.js",
   "scripts": {
     "dev": "vue-cli-service serve --watch",
     "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build",
+    "build": "vue-cli-service build --target lib --name emojify-picker --formats umd --entry src/index.ts",
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
@@ -31,5 +32,8 @@
     "sass-loader": "^8.0.2",
     "typescript": "~3.9.3",
     "vue-template-compiler": "^2.6.11"
+  },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com/"
   }
 }

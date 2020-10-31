@@ -213,11 +213,11 @@ export default class EmojifyPicker extends Vue {
       {
         staticClass: "emojify-picker__list",
         style: {
-          paddingTop: `${this.currentRow * this.itemSize}px`,
-          paddingBottom: `${(this.rowCount -
+          paddingTop: `${(this.currentRow * this.itemSize)}px`,
+          paddingBottom: `${((this.rowCount -
             this.columnItems -
             this.currentRow) *
-            this.itemSize}px`,
+            this.itemSize) - this.itemSize}px`,
         },
       },
       emojiItems
@@ -332,7 +332,6 @@ export default class EmojifyPicker extends Vue {
   }
 
   render(h: CreateElement) {
-    console.log(this.itemSize);
     return h(
       "div",
       {

@@ -9,4 +9,6 @@ export default function(vue: typeof Vue, options: PluginOptions = {}) {
   if (options.translator) {
     EmojifyPicker.prototype.$t = options.translator;
   }
+
+  Vue.component("emojify-picker", EmojifyPicker)
 }

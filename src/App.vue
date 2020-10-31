@@ -12,14 +12,9 @@
 
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator";
-import EmojifyPicker from "./EmojifyPicker";
 import emojis from "./emojis.json";
 
-@Component({
-  components: {
-    EmojifyPicker,
-  },
-})
+@Component
 export default class App extends Vue {
   sheet = emojis;
 }

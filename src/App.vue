@@ -4,8 +4,8 @@
 
     <emojify-picker
       :sheet="sheet"
-      :emoji-size="22"
-      style="width: 525px;height: 500px;"
+      :emoji-size="24"
+      style="width: 620px;height: 500px;"
     />
   </div>
 </template>
@@ -17,8 +17,8 @@ import emojis from "./emojis.json";
 
 @Component({
   components: {
-    EmojifyPicker
-  }
+    EmojifyPicker,
+  },
 })
 export default class App extends Vue {
   sheet = emojis;

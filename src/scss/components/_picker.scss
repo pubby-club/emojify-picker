@@ -1,5 +1,8 @@
 .emojify-picker {
-  --btn-size: calc(var(--emoji-size) + 16px);
+  --btn-border: 2px;
+  --btn-padding: 8px;
+  --btn-size: calc(var(--emoji-size) + var(--btn-padding));
+
   display: flex;
   flex-direction: column;
   position: relative;
@@ -56,13 +59,8 @@
 
   &__list {
     display: grid;
-    grid-template-columns: repeat(
-      auto-fit,
-      minmax(var(--btn-size), max-content)
-    );
-    gap: var(--item-gap);
-    padding: 0.25em;
-
+    grid-template-columns: repeat(auto-fit, var(--btn-size));
+    justify-content: space-between;
     &-item {
       text-align: center;
       display: block;
@@ -80,6 +78,8 @@
       line-height: var(--emoji-size);
       width: var(--btn-size);
       height: var(--btn-size);
+      text-align: center;
+      overflow: hidden;
 
       &:hover,
       &:focus {
@@ -93,8 +93,8 @@
 
       img {
         display: block;
-        width: 100%;
-        height: auto;
+        width: var(--emoji-size);
+        height: var(--emoji-size);
       }
     }
   }

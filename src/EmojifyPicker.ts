@@ -78,7 +78,6 @@ export default class EmojifyPicker extends Vue {
   itemGap = 4;
 
   get emojiTree() {
-    console.log("TREE");
     return this.sheet.groups.map((group, groupIndex) => {
       return {
         title: group.title,
@@ -112,12 +111,10 @@ export default class EmojifyPicker extends Vue {
   }
 
   get itemSize() {
-    return this.emojiSize + 16 + this.itemGap; // 16px padding / 4px gap
+    return this.emojiSize + 8; // 8px padding / 4px gap
   }
 
   get rowItems() {
-    console.log((this.viewWidth - this.itemGap) / this.itemSize);
-    console.log(this.itemSize);
     return Math.floor((this.viewWidth - this.itemGap) / this.itemSize);
   }
 
@@ -146,8 +143,8 @@ export default class EmojifyPicker extends Vue {
   }
 
   mounted() {
-    this.viewHeight = this.$refs.scroll.offsetHeight;
-    this.viewWidth = this.$refs.scroll.offsetWidth;
+    this.viewHeight = this.$refs.scroll.clientHeight;
+    this.viewWidth = this.$refs.scroll.clientWidth;
   }
 
   $t(text: string) {
@@ -309,14 +306,15 @@ export default class EmojifyPicker extends Vue {
     this.$nextTick(() => {
       if (this.$refs.scroll) {
         this.scrollTop = 0;
-        this.viewWidth = this.$refs.scroll.offsetWidth;
-        this.viewHeight = this.$refs.scroll.offsetHeight;
+        this.viewWidth = this.$refs.scroll.clientWidth;
+        this.viewHeight = this.$refs.scroll.clientHeight;
         this.$refs.scroll.scrollTop = 0;
       }
     });
   }
 
   render(h: CreateElement) {
+    console.log(this.itemSize);
     return h(
       "div",
       {
@@ -341,7 +339,6 @@ export default class EmojifyPicker extends Vue {
             key: this.currentGroupIndex,
             on: {
               scroll: () => {
-                console.log(this.rowItems);
                 this.scrollTop = this.$refs.scroll.scrollTop;
               },
             },

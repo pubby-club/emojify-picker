@@ -75,7 +75,7 @@ export default class EmojifyPicker extends Vue {
 
   errorImages = new Set<string>();
 
-  itemGap = 4;
+  listPadding = 4;
 
   get emojiTree() {
     return this.sheet.groups.map((group, groupIndex) => {
@@ -115,7 +115,7 @@ export default class EmojifyPicker extends Vue {
   }
 
   get rowItems() {
-    return Math.floor((this.viewWidth - this.itemGap) / this.itemSize);
+    return Math.floor(this.viewWidth / this.itemSize);
   }
 
   get columnItems() {
@@ -127,11 +127,11 @@ export default class EmojifyPicker extends Vue {
   }
 
   get startOffset() {
-    return Math.floor(this.scrollTop / this.itemSize) * this.rowItems;
+    return Math.max(0, Math.floor(this.scrollTop / this.itemSize) * this.rowItems - this.rowItems);
   }
 
   get endOffset() {
-    return this.startOffset + this.rowItems * this.columnItems;
+    return this.startOffset + this.rowItems * this.columnItems + this.rowItems * 2;
   }
 
   get itemCount() {
@@ -143,8 +143,8 @@ export default class EmojifyPicker extends Vue {
   }
 
   mounted() {
-    this.viewHeight = this.$refs.scroll.clientHeight;
-    this.viewWidth = this.$refs.scroll.clientWidth;
+    this.viewHeight = this.$refs.scroll.clientHeight - this.listPadding;
+    this.viewWidth = this.$refs.scroll.clientWidth - this.listPadding * 2;
   }
 
   $t(text: string) {
@@ -265,6 +265,9 @@ export default class EmojifyPicker extends Vue {
     return this.$createElement(
       "button",
       {
+        attrs: {
+          tabIndex: 0,
+        },
         staticClass: "emojify-picker__list-item",
         key: emoji.codes,
         keepAlive: true,
@@ -277,7 +280,22 @@ export default class EmojifyPicker extends Vue {
   }
 
   genInputSearch() {
-    return this.$createElement("div");
+    if (this.$scopedSlots.search) {
+      return this.$scopedSlots.search(this)
+    }
+    return this.$createElement("input", {
+      attrs: {
+        type: "text",
+        placeholder: "Pesquisar..."
+      },
+      staticClass: 'emojify-picker__input-search',
+      on: {
+        input: (e: InputEvent) => this.searchQuery = (e.target as HTMLInputElement).value
+      },
+      domProps: {
+        value: this.searchQuery
+      }
+    });
   }
 
   getGroupImageUrl(group: EmojiGroup) {
@@ -306,8 +324,8 @@ export default class EmojifyPicker extends Vue {
     this.$nextTick(() => {
       if (this.$refs.scroll) {
         this.scrollTop = 0;
-        this.viewWidth = this.$refs.scroll.clientWidth;
-        this.viewHeight = this.$refs.scroll.clientHeight;
+        this.viewWidth = this.$refs.scroll.clientWidth - this.listPadding * 2;
+        this.viewHeight = this.$refs.scroll.clientHeight - this.listPadding;
         this.$refs.scroll.scrollTop = 0;
       }
     });
@@ -325,7 +343,7 @@ export default class EmojifyPicker extends Vue {
         style: {
           "--emoji-size": this.emojiSize + "px",
           "--theme-color": this.themeColor,
-          "--item-gap": this.itemGap + "px",
+          "--list-padding": this.listPadding + "px"
         },
       },
       [

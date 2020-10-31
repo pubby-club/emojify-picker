@@ -4,8 +4,8 @@
 
     <emojify-picker
       :sheet="sheet"
-      :emoji-size="24"
-      style="width: 620px;height: 500px;"
+      :emoji-size="22"
+      style="width: 348px;height: 500px;"
     />
   </div>
 </template>

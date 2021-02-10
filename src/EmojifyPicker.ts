@@ -48,6 +48,12 @@ export default class EmojifyPicker extends Vue {
   themeColor!: string;
 
   @Prop({
+    type: String,
+    default: "Pesquisar..."
+  })
+  searchPlaceholder!: string;
+
+  @Prop({
     type: Function,
     default: (emoji: EmojiItem) =>
       emoji.codes
@@ -290,7 +296,7 @@ export default class EmojifyPicker extends Vue {
     return this.$createElement("input", {
       attrs: {
         type: "text",
-        placeholder: "Pesquisar..."
+        placeholder: this.searchPlaceholder
       },
       staticClass: 'emojify-picker__input-search',
       on: {

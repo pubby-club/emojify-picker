@@ -1,6 +1,6 @@
 {
-  "name": "@pubby-club/emojify-picker",
-  "version": "0.1.5",
+  "name": "@pubby/emojify-picker",
+  "version": "0.1.6",
   "private": false,
   "main": "dist/emojify-picker.umd.js",
   "scripts": {

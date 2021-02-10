@@ -24,10 +24,12 @@ export default class EmojifyPicker extends Vue {
     dark: boolean;
     emojiSize: number;
     themeColor: string;
+    searchPlaceholder: string;
     getFileName: (emoji: EmojiItem) => string;
     $refs: {
         scroll: HTMLDivElement;
     };
+    $t: (text: string) => string;
     currentGroupIndex: number;
     searchQuery: string;
     viewHeight: number;
@@ -64,7 +66,7 @@ export default class EmojifyPicker extends Vue {
     get itemCount(): number;
     get rowCount(): number;
     mounted(): void;
-    $t(text: string): any;
+    created(): void;
     genEmojiGroups(): import("vue").VNode | import("vue").VNode[] | undefined;
     genGroupItem(group: EmojiGroup, index: number): import("vue").VNode | import("vue").VNode[] | undefined;
     genEmojiList(): import("vue").VNode | import("vue").VNode[] | undefined;
